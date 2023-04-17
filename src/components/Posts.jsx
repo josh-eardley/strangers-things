@@ -1,6 +1,10 @@
+import PostsSearch from "./PostsSearch";
+
 const Posts = (props) => {
 console.log(props);
     return (
+        <>
+        <PostsSearch />
         <section id="postsView">
         {props.posts.map( (post) => {
 
@@ -16,6 +20,7 @@ console.log(props);
         }
          )} 
         </ section>
+        </>
     )
 }
 

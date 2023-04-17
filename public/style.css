@@ -7,13 +7,24 @@
     flex-direction: column;
     width: 20%;
     justify-content: space-between;
-    border: solid black 2px;
+    border: solid gray 1px;
+    border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    box-shadow: 0 2px 5px -2px black;
+    box-shadow: 0 2px 5px -2px gray;
 }
 
 #postsView {
     display: flex;
     flex-wrap: wrap;
+}
+
+#postsSearch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#postsHeader {
+    margin-right: 10px;
 }
