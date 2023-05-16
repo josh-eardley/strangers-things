@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { login } from "../api/auth"
 
- const Login = ({setIsLoggedIn, setToken, setUser}) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    
+ const Login = ({setIsLoggedIn, setToken, setUser, username, setUsername, password, setPassword}) => {
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         

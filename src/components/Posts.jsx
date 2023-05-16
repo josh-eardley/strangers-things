@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { makePost } from "../api/index"
+import { deletePost, makePost } from "../api/index"
 
 const Posts = (props) => {
-
+    console.log("Username:", props.user.username)
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -12,16 +12,9 @@ const Posts = (props) => {
         event.preventDefault();
         
         const postToCreate = { post: {title: title, description: description, price: price, location: location} };
-        const data = await makePost(postToCreate);
-        console.log(data);
-
-        // if(data.user) {
-        //     setUser(data.user);
-        //     setToken(data.token);
-        //     setIsLoggedIn(true);
-        // }
-        
+        const data = await makePost(postToCreate, props.token);   
     }
+
     return (
         <>
         <form onSubmit={handleSubmit}>Create New Post
@@ -41,16 +34,32 @@ const Posts = (props) => {
 
         <section id="postsView">
         {props.posts.map( (post) => {
+            
+            if(post.author.username === props.user.username) {
+                return (
+            <article key={post.id} id="singlePost">
+                <h2>{post.title}</h2>
+                <p>{post.description}</p>
+                <p>Price: {post.price}</p>
+                <p>Seller: {post.author.username}</p>
+                <p>Location: {post.location}</p>
+                <button onClick={async () => {
+                    await deletePost(post._id, props.token)
+                }}>Delete</button>
+            </article>
+                )
 
-            return (
-        <article id="singlePost">
-            <h2>{post.title}</h2>
-            <p>{post.description}</p>
-            <p>Price: {post.price}</p>
-            <p>Seller: {post.author.username}</p>
-            <p>Location: {post.location}</p>
-        </article>
-            )
+            } else {
+                return (
+                    <article key={post.id} id="singlePost">
+                        <h2>{post.title}</h2>
+                        <p>{post.description}</p>
+                        <p>Price: {post.price}</p>
+                        <p>Seller: {post.author.username}</p>
+                        <p>Location: {post.location}</p>
+                    </article>
+                        )
+            }
         }
          )} 
         </ section>
