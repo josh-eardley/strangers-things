@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { login } from "../api/auth"
+import { registerUser } from "../api/auth"
 
- const Login = ({setIsLoggedIn, setToken, setUser}) => {
+ const Register = ({setIsLoggedIn, setToken, setUser}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
@@ -9,7 +9,7 @@ import { login } from "../api/auth"
         event.preventDefault();
         
         const userToAuth = { user: { username: username, password: password } };
-        const data = await login(userToAuth);
+        const data = await registerUser(userToAuth);
         console.log(data);
 
         if(data.user) {
@@ -27,10 +27,10 @@ import { login } from "../api/auth"
 
             <label htmlFor="">Password</label>
             <input type="text" value={password} onChange={(event) => setPassword(event.target.value)} />
-            <button type="submit">Log In</button>
+            <button type="submit">Register</button>
         </form>
     )
 }
 
 
-export default Login
+export default Register;

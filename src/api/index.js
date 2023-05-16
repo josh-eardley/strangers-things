@@ -9,3 +9,22 @@ export const fetchPosts = async () => {
         console.log(Error);
     }
 }
+
+export const makePost = async (postObject) => {
+
+    try {
+      const response = await fetch(`${APIURL}/posts`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(postObject)
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
